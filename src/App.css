@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+header{
+    height: 30vh;
+    font-size: 50px;
+    background-color: gainsboro;
+    border: 1px solid black;
+    text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+    text-decoration: none;
+    color: black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+main{
+    display: flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.NotesContent{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    height: 70vh;
+    overflow: scroll;
 }
 
-.App-link {
-  color: #61dafb;
+.note{
+    border: 1px solid black;
+    text-emphasis: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.folderContent{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    width: 30%;
+    height: 70vh;
+
+}
+
+.folder{
+    border: 1px solid black;
+    text-emphasis: center;
+}
+
+button{
+    display: inline-block;
+    height: 40px;
+    width: 50px;
+}
+
+li{
+    list-style: none;
+}
+
+.NoteCard{
+    display: flex;
+}
+
+.cardInfo{
+    width: 60%;
+}
+
+.folderInfo{
+    width: 40%;
+}
+
+#goBack{
+    border: 1px solid black;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 10px;
 }

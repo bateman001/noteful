@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import NotefulContext from '../NotefulContext';
 
 class NoteCard extends React.Component{
     
+    static contextType = NotefulContext;
 
     folder = () => {
-        console.log(this.props.store.notes)
-        let noteCard = this.props.store.notes.find(note => note.id === this.props.match.params.id);
+        let noteCard = this.context.notes.find(note => note.id === this.props.noteId);
 
-        let folderId = this.props.store.folders.find(folder => folder.id === noteCard.folderId);
+        let folderId = this.context.folders.find(folder => folder.id === noteCard.folderId);
 
         console.log(folderId.name);
         return [noteCard, folderId];

@@ -1,14 +1,28 @@
 import React from 'react';
-import {Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import NotefulContext from '../NotefulContext';
 
 class NotesList extends React.Component{
+
+    static contextType = NotefulContext;
 
     deleteNote(note){
         const url=`http://localhost:9090/notes/${note}`;
 
-        fetch(url, {method: 'DELETE'})
-        .then(response => response.json())
-        .then(responseJson => console.log(responseJson))
+        fetch(url, {method: 'DELETE',
+                    header: {
+                        'content-type': 'application/json'
+                    },
+                })
+        .then(response => {
+            if (response.status !== 200){
+                throw new Error(response.status);
+            }
+            return response.json();
+        })
+        .then(() => {
+            this.context.removeNote(note);
+        })
         .catch(err => 'something went wrong');
     }
 

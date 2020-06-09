@@ -34,6 +34,15 @@ class App extends React.Component {
     .catch(err => 'something went wrong');
   }
 
+  removeNote(noteId){
+
+    const notes = this.state.notes.filter(note => note.id !== noteId)
+
+    this.setState({
+      notes: notes
+    });
+  }
+
   render(){
 
     const {history} = this.props;
@@ -49,6 +58,7 @@ class App extends React.Component {
             notes: this.state.notes,
             folders: this.state.folders,
             history,
+            removeNote: id => this.removeNote(id)
           }}>
 
           <Switch>

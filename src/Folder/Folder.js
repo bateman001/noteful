@@ -7,7 +7,6 @@ class Folder extends React.Component{
 static contextType = NotefulContext;
 
 folder = () => {
-    console.log(this.context)
     return this.context.folders.map((folder, index) => {
        return <FolderList
             index= {index}

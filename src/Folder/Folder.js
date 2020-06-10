@@ -1,6 +1,7 @@
 import React from 'react';
 import FolderList from './FolderList';
 import NotefulContext from '../NotefulContext';
+import AddFolder from './AddFolder';
 
 class Folder extends React.Component{
 
@@ -25,7 +26,7 @@ render(){
             <ul>
                 {this.folder()}
             </ul>
-            <button id="addFolder">Add Folder</button>
+            <AddFolder />
         </div>
         </>
     );

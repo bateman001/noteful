@@ -1,6 +1,7 @@
 import React from 'react';
 import NotesList from './NotesList';
 import NotefulContext from '../NotefulContext';
+import AddNote from './AddNote';
 
 class Notes extends React.Component{
 
@@ -24,7 +25,7 @@ render(){
             <ul>
                 {this.noteList()}
             </ul>
-            <button id="addNote">Add Notes</button>
+            <AddNote />
         </div>
     );
 }

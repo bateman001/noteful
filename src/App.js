@@ -12,10 +12,14 @@ class App extends React.Component {
   
     state={
         notes: [],
-        folders: []
+        folders: [],
+        folderFormHidden: false,
+        noteFormHidden: false,
+        newFolder: {},
+        newNote: '',
     }
 
-  componentWillMount(){
+  componentDidMount(){
     const folderurl='http://localhost:9090/folders';
 
     fetch(folderurl)
@@ -43,8 +47,33 @@ class App extends React.Component {
     });
   }
 
-  render(){
+  showForm(type){
 
+  if(type === 'folder'){
+    this.setState({
+      folderFormHidden: !this.state.folderFormHidden
+    })
+  }else if(type === 'note'){
+    this.setState({
+      noteFormHidden: !this.state.noteFormHidden
+    })
+  }
+  }
+
+  updateFolder(name){
+    let id = name + name.length;
+    console.log(id);
+
+    this.setState({
+      newFolder: {
+        name: name
+      }
+    })
+  }
+
+
+  render(){
+    console.log(this.state.newFolder)
     const {history} = this.props;
 
     return (
@@ -57,8 +86,14 @@ class App extends React.Component {
           <NotefulContext.Provider value={{
             notes: this.state.notes,
             folders: this.state.folders,
+            newFolder: this.state.newFolder,
+            newNote: this.state.newNote,
             history,
-            removeNote: id => this.removeNote(id)
+            removeNote: id => this.removeNote(id),
+            folderFormHidden: this.state.folderFormHidden,
+            noteFormHidden: this.state.noteFormHidden,
+            showForm: type => this.showForm(type),
+            updateFolder: name => this.updateFolder(name)
           }}>
 
           <Switch>
@@ -70,7 +105,7 @@ class App extends React.Component {
             </>
           )} /> 
           <Route path="/notecard/:id" render={ r => (
-        <NoteCard noteId={r.match.params.id} />  
+          <NoteCard noteId={r.match.params.id} />  
           )}/>
           </Switch>
           </NotefulContext.Provider>

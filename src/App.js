@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import{Route, Switch, Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import Folder from './Folder/Folder';
-import Notes from './Notes/Notes';
+import Folder from './Folder/RenderFolder';
+import Notes from './Notes/RenderNotes';
 import NoteCard from './Notes/NoteCard';
 import NotefulContext from './NotefulContext';
+import NoteFullError from './NoteFullError';
 
 
 class App extends React.Component {
@@ -16,7 +17,10 @@ class App extends React.Component {
         folderFormHidden: false,
         noteFormHidden: false,
         newFolder: {},
-        newNote: '',
+        newNote: {
+        name: '',
+        modified: '',
+        content: ''},
     }
 
   componentDidMount(){
@@ -61,8 +65,6 @@ class App extends React.Component {
   }
 
   updateFolder(name){
-    let id = name + name.length;
-    console.log(id);
 
     this.setState({
       newFolder: {
@@ -71,9 +73,41 @@ class App extends React.Component {
     })
   }
 
+  updateNote(data, id){
+    if(id === "name"){
+      this.setState({
+        newNote: {...this.state.newNote, name: data}
+      })
+    }else if(id === "modified"){
+      this.setState({
+        newNote: {...this.state.newNote, modified: data}
+      })
+    }else if(id === "content"){
+      this.setState({
+        newNote: {...this.state.newNote, content: data}
+      })
+    }
+    }
+
+  addFolder(folder){
+    this.setState({
+      newFolder: {
+        name: ''
+      },
+      folders: [...this.state.folders, folder],
+      folderFormHidden: !this.state.folderFormHidden
+    })
+  }
+
+  addNote(note){
+    this.setState({
+      newNote: {},
+      notes: [...this.state.notes, note],
+      noteFormHidden: !this.state.noteFormHidden
+    })
+  }
 
   render(){
-    console.log(this.state.newFolder)
     const {history} = this.props;
 
     return (
@@ -92,11 +126,14 @@ class App extends React.Component {
             removeNote: id => this.removeNote(id),
             folderFormHidden: this.state.folderFormHidden,
             noteFormHidden: this.state.noteFormHidden,
+            addFolder: folder => this.addFolder(folder),
             showForm: type => this.showForm(type),
-            updateFolder: name => this.updateFolder(name)
+            updateFolder: name => this.updateFolder(name),
+            updateNote: (data, id) => this.updateNote(data, id),
+            addNote: note => this.addNote(note)
           }}>
-
-          <Switch>
+        <NoteFullError>
+        <Switch>
           <Route exact path='/' component={Folder}/>
           <Route path="/notes/:id" render={ r => (
             <>
@@ -107,8 +144,10 @@ class App extends React.Component {
           <Route path="/notecard/:id" render={ r => (
           <NoteCard noteId={r.match.params.id} />  
           )}/>
-          </Switch>
-          </NotefulContext.Provider>
+          </Switch> 
+        </NoteFullError>
+        </NotefulContext.Provider>
+
           
           </main>
       </div>

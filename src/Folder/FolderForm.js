@@ -12,11 +12,13 @@ class FolderForm extends React.Component{
             "name": this.context.newFolder.name
         }
 
+        console.log(folder);
+
         const options = {
             method: 'POST',
-            body: folder,
-            header: {
-                'content-type': 'application/json'
+            body: JSON.stringify(folder),
+            headers: {
+                'Content-Type': 'application/json'
             }
         }
 
@@ -30,8 +32,7 @@ class FolderForm extends React.Component{
            return res.json();
         })
         .then(data => {
-           console.log(data);
-            // this.context.addFolder(options.folder);
+            this.context.addFolder(data);
         }).catch()
 
     }

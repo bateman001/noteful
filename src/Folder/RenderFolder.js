@@ -7,19 +7,20 @@ class Folder extends React.Component{
 
 static contextType = NotefulContext;
 
+
 folder = () => {
     return this.context.folders.map((folder, index) => {
        return <FolderList
             index= {index}
             id={folder.id}
             name={folder.name}
-            {...this.props}
         />
 
     })
 }
 
 render(){
+
     return(
         <>
         <div className="folderContent">

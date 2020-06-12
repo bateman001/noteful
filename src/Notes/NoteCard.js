@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
+
 
 class NoteCard extends React.Component{
     
@@ -11,12 +13,10 @@ class NoteCard extends React.Component{
 
         let folderId = this.context.folders.find(folder => folder.id === noteCard.folderId);
 
-        console.log(folderId.name);
         return [noteCard, folderId];
     }
 
     render(){
-        console.log(this.folder()[0])
         return(
             <div className="NoteCard">
             <div className="folderInfo">
@@ -33,6 +33,10 @@ class NoteCard extends React.Component{
             </div>
         )
     }
+}
+
+NoteCard.propTypes = {
+    noteId: PropTypes.string
 }
 
 export default NoteCard;

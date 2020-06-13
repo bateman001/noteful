@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 import{Route, Switch, Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import Folder from './Folder/RenderFolder';
-import Notes from './Notes/RenderNotes';
+import RenderFolder from './Folder/RenderFolder';
+import RenderNotes from './Notes/RenderNotes';
 import NoteCard from './Notes/NoteCard';
 import NotefulContext from './NotefulContext';
-import NoteFullError from './NoteFullError';
 
 
 class App extends React.Component {
@@ -21,6 +20,9 @@ class App extends React.Component {
         name: '',
         modified: '',
         content: ''},
+        foldererr: false,
+        noteErr: false,
+        folderClicked: null
     }
 
   componentDidMount(){
@@ -42,14 +44,6 @@ class App extends React.Component {
     .catch(err => 'something went wrong');
   }
 
-  removeNote(noteId){
-
-    const notes = this.state.notes.filter(note => note.id !== noteId)
-
-    this.setState({
-      notes: notes
-    });
-  }
 
   showForm(type){
 
@@ -64,8 +58,8 @@ class App extends React.Component {
   }
   }
 
+  //FOLDER FUNCTIONS
   updateFolder(name){
-
     this.setState({
       newFolder: {
         name: name
@@ -73,6 +67,44 @@ class App extends React.Component {
     })
   }
 
+  folderToggleErr(){
+    this.setState({
+      foldererr: !this.state.foldererr
+    })
+  }
+
+  addFolder(folder){
+    this.setState({
+      newFolder: {
+        name: ''
+      },
+      folders: [...this.state.folders, folder],
+      folderFormHidden: !this.state.folderFormHidden,
+    });
+    this.folderToggleErr();
+  }
+
+  changeClicked(parent){
+
+    if(this.state.folderClicked === null){
+      document.getElementById(`${parent.id}`).classList.add('class', 'clicked');
+
+      this.setState({
+        folderClicked: parent.id
+      });
+
+    }else if(this.state.foliderClicked !== parent.id){
+      document.getElementById(this.state.folderClicked).classList.remove('clicked');
+      document.getElementById(`${parent.id}`).classList.add('clicked');
+
+      this.setState({
+        folderClicked: parent.id
+      })
+   }
+
+  }
+
+ //NOTE FUNCTIONS
   updateNote(data, id){
     if(id === "name"){
       this.setState({
@@ -89,24 +121,33 @@ class App extends React.Component {
     }
     }
 
-  addFolder(folder){
-    this.setState({
-      newFolder: {
-        name: ''
-      },
-      folders: [...this.state.folders, folder],
-      folderFormHidden: !this.state.folderFormHidden
-    })
-  }
-
   addNote(note){
     this.setState({
       newNote: {},
       notes: [...this.state.notes, note],
       noteFormHidden: !this.state.noteFormHidden
+    });
+
+    this.noteToggleErr();
+  }
+
+  removeNote(noteId){
+
+    const notes = this.state.notes.filter(note => note.id !== noteId)
+
+    this.setState({
+      notes: notes
+    });
+  }
+
+
+  noteToggleErr(){
+    this.setState({
+      noteErr: !this.state.noteErr
     })
   }
 
+  
   render(){
     const {history} = this.props;
 
@@ -118,34 +159,31 @@ class App extends React.Component {
 
           <main>
           <NotefulContext.Provider value={{
-            notes: this.state.notes,
-            folders: this.state.folders,
-            newFolder: this.state.newFolder,
-            newNote: this.state.newNote,
+            ...this.state,
             history,
             removeNote: id => this.removeNote(id),
-            folderFormHidden: this.state.folderFormHidden,
-            noteFormHidden: this.state.noteFormHidden,
             addFolder: folder => this.addFolder(folder),
             showForm: type => this.showForm(type),
             updateFolder: name => this.updateFolder(name),
             updateNote: (data, id) => this.updateNote(data, id),
-            addNote: note => this.addNote(note)
+            addNote: note => this.addNote(note),
+            folderToggleErr: () => this.folderToggleErr(),
+            noteToggleErr: () => this.noteToggleErr(),
+            changeClicked: id => this.changeClicked(id)
           }}>
-        <NoteFullError>
         <Switch>
-          <Route exact path='/' component={Folder}/>
-          <Route path="/notes/:id" render={ r => (
+          <Route exact path='/' component={RenderFolder}/>
+          <Route path="/folder/:id" render={ r => (
             <>
-            <Folder />
-            <Notes noteId={r.match.params.id}/>
+            <RenderFolder clicked={this.state.clicked}/>
+            <RenderNotes noteId={r.match.params.id}/>
             </>
           )} /> 
+
           <Route path="/notecard/:id" render={ r => (
-          <NoteCard noteId={r.match.params.id} />  
+            <NoteCard noteId={r.match.params.id} />  
           )}/>
           </Switch> 
-        </NoteFullError>
         </NotefulContext.Provider>
 
           
@@ -156,16 +194,3 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
-
-// <Route path='/folder' component={Folder} />
-//             <Route path='/Notes' component={Notes} />
-//             <Route component={NotFound} />
-
-
-
-// <Switch>
-// <Route exact path='/' render={() => <Main folders={this.state.store.folders}/>}/>
-// <Route path='/notes'>
-//     <Notes/>
-// </Route>
-// </Switch>

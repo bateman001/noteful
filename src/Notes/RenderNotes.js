@@ -3,9 +3,10 @@ import NotesList from './NotesList';
 import NotefulContext from '../NotefulContext';
 import AddNote from './AddNote';
 import PropTypes from 'prop-types';
+import NoteFullError from '../NoteFullError';
 
-
-class Notes extends React.Component{
+//RENDERS NOTES FOR FOLDER BY MATCHING FOLDER IDS
+class RenderNotes extends React.Component{
 
 static contextType = NotefulContext;
 
@@ -26,7 +27,9 @@ render(){
     return(
         <div className="NotesContent">
             <ul>
-                {this.noteList()}
+                <NoteFullError message='cannot display notes'>
+                 {this.noteList()}
+                </NoteFullError>
                 <AddNote folderId={this.props.noteId}/>
             </ul>
         </div>
@@ -34,9 +37,9 @@ render(){
 }
 }
 
-Notes.propTypes = {
+RenderNotes.propTypes = {
     noteId: PropTypes.string,
 
 }
 
-export default Notes;
+export default RenderNotes;

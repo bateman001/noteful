@@ -2,6 +2,7 @@ import React from 'react';
 import NotefulContext from '../NotefulContext';
 import FolderForm from './FolderForm';
 
+//BUTTON THAT EXPANDS THE FOLDER FORM COMPONENT
 class AddFolder extends React.Component{
 
     static contextType = NotefulContext;

@@ -2,8 +2,10 @@ import React from 'react';
 import FolderList from './FolderList';
 import NotefulContext from '../NotefulContext';
 import AddFolder from './AddFolder';
+import NoteFullError from '../NoteFullError';
 
-class Folder extends React.Component{
+//RENDERS ALL FOLDERS IN THE ARRAY 
+class RenderFolder extends React.Component{
 
 static contextType = NotefulContext;
 
@@ -24,14 +26,16 @@ render(){
     return(
         <>
         <div className="folderContent">
+            <NoteFullError message='cannot display folder'>
             <ul>
                 {this.folder()}
             </ul>
-            <AddFolder />
+            </NoteFullError>
+             <AddFolder />
         </div>
         </>
     );
 }
 }
 
-export default Folder;
+export default RenderFolder;

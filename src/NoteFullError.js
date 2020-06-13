@@ -12,8 +12,9 @@ class NoteFullError extends React.Component{
         return {hasError: true}
     }
     render(){
+        const message = this.props.message || "could not display data"
         if(this.state.hasError){
-            return <h2>Could not display data</h2>
+        return <h2>{message}</h2>
         }
         return this.props.children;
     }

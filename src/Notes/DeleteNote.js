@@ -2,6 +2,7 @@ import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 
+//COMPONENT WHICH DELETS THE NOTE
 class DeleteNote extends React.Component{
 
     static contextType = NotefulContext;

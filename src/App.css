@@ -96,3 +96,12 @@ form{
 legend, label, input, button{
     margin: 10px 0;
 }
+
+.error{
+    color: red;
+    font-size: 10px;
+}
+
+.clicked{
+    background-color: lightblue;
+}

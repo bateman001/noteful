@@ -2,7 +2,7 @@ import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 
-
+//THE FORM WHICH EXPANDS ONCE YOU CLICK ADD NOTES IN COMPONENT ADDNOTE
 class NoteForm extends React.Component{
 
     static contextType = NotefulContext;
@@ -26,17 +26,19 @@ class NoteForm extends React.Component{
                 'Content-Type': 'application/json'
             }
         }
-
+        if(note.name.trim() === ''){
+            this.context.noteToggleErr();
+        }else{
         fetch(url, options)
         .then(res => {
             if(!res.ok){
                 throw new Error("something went wrong")
             }
-
             return res.json();
         })
         .then(data => this.context.addNote(data))
-        .catch(err => "soemthing went wrong");
+        .catch(err => "something went wrong");
+        }
     }
     render(){
 
@@ -45,13 +47,14 @@ class NoteForm extends React.Component{
             <form onSubmit={e => this.submitNote(e)}>
                 <legend>Add Note</legend>
 
-                <label htmlFor="Name">Name</label>
+                <label htmlFor="Name">Name:</label>
+                {this.context.noteErr && <p className='error'>*name cannot be empty space*</p>}
                 <input type="text" id='name' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
-                <label htmlFor="Content">Content</label>
+                <label htmlFor="Content">Content:</label>
                 <input type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
-                <label htmlFor="modified">modified</label>
+                <label htmlFor="modified">Modified:</label>
                 <input type="text" id='modified' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
                 
                 <button type="submit">submit</button>

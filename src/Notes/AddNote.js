@@ -3,7 +3,7 @@ import NotefulContext from '../NotefulContext';
 import NoteForm from './NoteForm';
 import PropTypes from 'prop-types';
 
-
+//ADD NOTE BUTTONN WHICH EXPANDS THE NOTEFORM COMPONENT 
 class AddNote extends React.Component{
 
     static contextType = NotefulContext;

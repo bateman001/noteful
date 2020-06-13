@@ -4,7 +4,7 @@ import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 import DeletNote from './DeleteNote';
 
-
+//NOTES IN SELECTED FOLDER
 class NotesList extends React.Component{
 
     static contextType = NotefulContext;
@@ -26,8 +26,6 @@ NotesList.propTypes = {
     name: PropTypes.string,
     modified: PropTypes.string,
     id: PropTypes.string
-
-
 }
 
 export default NotesList;

@@ -1,8 +1,8 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
-//import NoteFullError from '../NoteFullError';
 import NotesList from './NotesList';
 import AddNote from './AddNote';
+import NoteFullError from '../NoteFullError';
 
 class AllNotes extends React.Component{
 
@@ -23,9 +23,11 @@ class AllNotes extends React.Component{
     render(){
         return(
             <div className="NotesContent">
-            <ul>
-                 {this.notes()}
-            </ul>
+                <NoteFullError >
+                    <ul>
+                    {this.notes()}
+                    </ul>
+                </NoteFullError>
             <AddNote />
         </div>
 

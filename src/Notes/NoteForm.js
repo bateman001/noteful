@@ -1,6 +1,7 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
+import SelectForm from './SelectForm';
 
 //THE FORM WHICH EXPANDS ONCE YOU CLICK ADD NOTES IN COMPONENT ADDNOTE
 class NoteForm extends React.Component{
@@ -14,8 +15,8 @@ class NoteForm extends React.Component{
 
         const note = {
             "name": this.context.newNote.name,
-            "modified": this.context.newNote.modified,
-            "folderId": this.props.folderId,
+            "modified": this.modifiedDate(),
+            "folderId": this.context.selectedForm,
             "content": this.context.newNote.content
         }
 
@@ -26,6 +27,7 @@ class NoteForm extends React.Component{
                 'Content-Type': 'application/json'
             }
         }
+
         if(note.name.trim() === ''){
             this.context.noteToggleErr();
         }else{
@@ -40,6 +42,24 @@ class NoteForm extends React.Component{
         .catch(err => "something went wrong");
         }
     }
+
+    modifiedDate = () => {
+        let today = Date();
+
+        return today.toString()
+    }
+
+    folderOptions = () => {
+        return this.context.folders.map((folder, index) => {
+            return <SelectForm 
+                folderName = {folder.name}
+                index= {index}
+                folderId = {folder.id}
+            />
+        })
+    }
+
+
     render(){
 
         return(
@@ -54,9 +74,10 @@ class NoteForm extends React.Component{
                 <label htmlFor="Content">Content:</label>
                 <input type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
-                <label htmlFor="modified">Modified:</label>
-                <input type="text" id='modified' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
-                
+                <label htmlFor="Folder">Folder</label>  
+                <select value={this.context.selectedForm} onChange={e => this.context.handleChange(e)}>
+                    {this.folderOptions()}
+                </select>
                 <button type="submit">submit</button>
             </form>
             </>

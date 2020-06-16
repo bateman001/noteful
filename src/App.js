@@ -6,6 +6,7 @@ import RenderFolder from './Folder/RenderFolder';
 import RenderNotes from './Notes/RenderNotes';
 import NoteCard from './Notes/NoteCard';
 import NotefulContext from './NotefulContext';
+import AllNotes from './Notes/AllNotes';
 
 
 class App extends React.Component {
@@ -17,12 +18,12 @@ class App extends React.Component {
         noteFormHidden: false,
         newFolder: {},
         newNote: {
-        name: '',
-        modified: '',
-        content: ''},
+          name: '',
+          content: ''},
         foldererr: false,
         noteErr: false,
-        folderClicked: null
+        folderClicked: null,
+        selectedForm: ''
     }
 
   componentDidMount(){
@@ -44,7 +45,7 @@ class App extends React.Component {
     .catch(err => 'something went wrong');
   }
 
-
+//FORM FUNCTIONS
   showForm(type){
 
   if(type === 'folder'){
@@ -56,6 +57,12 @@ class App extends React.Component {
       noteFormHidden: !this.state.noteFormHidden
     })
   }
+  }
+
+  handleChange(event){
+    this.setState({
+      selectedForm: event.target.value
+    })
   }
 
   //FOLDER FUNCTIONS
@@ -85,8 +92,14 @@ class App extends React.Component {
   }
 
   changeClicked(parent){
+  
+    if(parent === 'Noteful'){
+      document.getElementById(`${this.state.folderClicked}`).classList.remove('clicked');
+      this.setState({
+        folderClicked: null
+      });
 
-    if(this.state.folderClicked === null){
+    }else if(this.state.folderClicked === null){
       document.getElementById(`${parent.id}`).classList.add('class', 'clicked');
 
       this.setState({
@@ -154,7 +167,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Link to='/' >Noteful</Link>
+          <Link to='/' onClick={event => this.changeClicked(event.target.text)}>Noteful</Link>
         </header>
 
           <main>
@@ -169,14 +182,21 @@ class App extends React.Component {
             addNote: note => this.addNote(note),
             folderToggleErr: () => this.folderToggleErr(),
             noteToggleErr: () => this.noteToggleErr(),
-            changeClicked: id => this.changeClicked(id)
+            changeClicked: id => this.changeClicked(id),
+            handleChange: event => this.handleChange(event)
           }}>
+
         <Switch>
-          <Route exact path='/' component={RenderFolder}/>
+          <Route exact path='/' render={() => (
+            <>
+            <RenderFolder/>
+            <AllNotes />
+            </>
+            )}/>
           <Route path="/folder/:id" render={ r => (
             <>
             <RenderFolder clicked={this.state.clicked}/>
-            <RenderNotes noteId={r.match.params.id}/>
+            <RenderNotes folderId={r.match.params.id}/>
             </>
           )} /> 
 

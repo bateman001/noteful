@@ -2,7 +2,6 @@ import React from 'react';
 import NotesList from './NotesList';
 import NotefulContext from '../NotefulContext';
 import AddNote from './AddNote';
-import PropTypes from 'prop-types';
 import NoteFullError from '../NoteFullError';
 
 //RENDERS NOTES FOR FOLDER BY MATCHING FOLDER IDS
@@ -11,7 +10,7 @@ class RenderNotes extends React.Component{
 static contextType = NotefulContext;
 
 noteList = () => {
-    let notes = this.context.notes.filter(note => note.folderId === this.props.noteId);
+    let notes = this.context.notes.filter(note => note.folderId === this.props.folderId);
 
     return notes.map((note, index) => {
         return <NotesList
@@ -30,16 +29,12 @@ render(){
                 <NoteFullError message='cannot display notes'>
                  {this.noteList()}
                 </NoteFullError>
-                <AddNote folderId={this.props.noteId}/>
+                <AddNote />
             </ul>
         </div>
     );
 }
 }
 
-RenderNotes.propTypes = {
-    noteId: PropTypes.string,
-
-}
 
 export default RenderNotes;

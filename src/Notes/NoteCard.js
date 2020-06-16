@@ -40,7 +40,7 @@ class NoteCard extends React.Component{
     }
 }
 
-NoteCard.propTypes = {
+NoteCard.propType = {
     noteId: PropTypes.string
 }
 

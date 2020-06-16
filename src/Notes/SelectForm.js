@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class SelectForm extends React.Component{
 
@@ -9,6 +10,12 @@ class SelectForm extends React.Component{
             </>
         )
     }
+}
+
+SelectForm.propType = {
+    index: PropTypes.number,
+    folderId: PropTypes.string,
+    folderName: PropTypes.string
 }
 
 export default SelectForm;

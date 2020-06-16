@@ -21,7 +21,7 @@ class NotesList extends React.Component{
     }
 }
 
-NotesList.propTypes = {
+NotesList.propType = {
     index: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string,

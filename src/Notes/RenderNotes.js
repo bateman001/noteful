@@ -3,6 +3,7 @@ import NotesList from './NotesList';
 import NotefulContext from '../NotefulContext';
 import AddNote from './AddNote';
 import NoteFullError from '../NoteFullError';
+import PropTypes from 'prop-types';
 
 //RENDERS NOTES FOR FOLDER BY MATCHING FOLDER IDS
 class RenderNotes extends React.Component{
@@ -34,6 +35,10 @@ render(){
         </div>
     );
 }
+}
+
+RenderNotes.propType = {
+    folderId: PropTypes.string
 }
 
 

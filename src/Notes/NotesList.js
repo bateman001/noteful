@@ -15,7 +15,8 @@ class NotesList extends React.Component{
             <li className="note" key={this.props.index}>
                 <Link to={`/notecard/${this.props.id}`}><h1>{this.props.name}</h1></Link>
                 <p>Date modified on {this.props.modified}</p>
-                <DeletNote id={this.props.id}/>
+                <DeletNote id={this.props.id}
+                            folderId={this.props.folderId}/>
             </li>
         )
     }

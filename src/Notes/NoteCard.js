@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 import NoteFullError from '../NoteFullError';
+import DeleteNote from './DeleteNote';
 
 //THE INDIVIDUAL NOTE 
 class NoteCard extends React.Component{
@@ -18,6 +19,8 @@ class NoteCard extends React.Component{
     }
 
     render(){
+        console.log(this.context)
+        console.log(this.folder()[0])
         return(
             <div className="NoteCard">
             <NoteFullError>
@@ -31,8 +34,9 @@ class NoteCard extends React.Component{
                 <div className="cardInfo">
                 <h1>{this.folder()[0].name}</h1>
                 <p>{this.folder()[0].content}</p>
+
+                <DeleteNote id={this.folder()[0].id}/>
                 </div>
-            
             </NoteFullError>
             
             </div>

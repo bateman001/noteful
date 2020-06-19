@@ -16,7 +16,7 @@ class NoteForm extends React.Component{
         const note = {
             "name": this.context.newNote.name,
             "modified": this.modifiedDate(),
-            "folderId": this.context.selectedForm,
+            "folderId": this.context.newNote.folderId,
             "content": this.context.newNote.content
         }
 
@@ -75,7 +75,7 @@ class NoteForm extends React.Component{
                 <input type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
                 <label htmlFor="Folder">Folder</label>  
-                <select value={this.context.selectedForm} onChange={e => this.context.handleChange(e)}>
+                <select id="folderId" value={this.context.newNote.folderId} onChange={e => this.context.updateNote(e.target.value, e.target.id)}>
                     {this.folderOptions()}
                 </select>
                 <button type="submit">submit</button>

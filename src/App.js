@@ -19,11 +19,11 @@ class App extends React.Component {
         newFolder: {},
         newNote: {
           name: '',
-          content: ''},
+          content: '',
+          folderId: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"},
         foldererr: false,
         noteErr: false,
         folderClicked: null,
-        selectedForm: ''
     }
 
   componentDidMount(){
@@ -59,12 +59,6 @@ class App extends React.Component {
   }
   }
 
-  handleChange(event){
-    this.setState({
-      selectedForm: event.target.value
-    })
-  }
-
   //FOLDER FUNCTIONS
   updateFolder(name){
     this.setState({
@@ -91,30 +85,10 @@ class App extends React.Component {
     this.folderToggleErr();
   }
 
-  changeClicked(parent){
-  
-    if(parent === 'Noteful'){
-      document.getElementById(`${this.state.folderClicked}`).classList.remove('clicked');
-      this.setState({
-        folderClicked: null
-      });
-
-    }else if(this.state.folderClicked === null){
-      document.getElementById(`${parent.id}`).classList.add('class', 'clicked');
-
-      this.setState({
-        folderClicked: parent.id
-      });
-
-    }else if(this.state.foliderClicked !== parent.id){
-      document.getElementById(this.state.folderClicked).classList.remove('clicked');
-      document.getElementById(`${parent.id}`).classList.add('clicked');
-
-      this.setState({
-        folderClicked: parent.id
-      })
-   }
-
+  changeClicked(folderId){
+    this.setState({
+      folderClicked: folderId
+    })
   }
 
  //NOTE FUNCTIONS
@@ -123,16 +97,16 @@ class App extends React.Component {
       this.setState({
         newNote: {...this.state.newNote, name: data}
       })
-    }else if(id === "modified"){
-      this.setState({
-        newNote: {...this.state.newNote, modified: data}
-      })
     }else if(id === "content"){
       this.setState({
         newNote: {...this.state.newNote, content: data}
       })
+    }else if(id === "folderId"){
+      this.setState({
+        newNote: {...this.state.newNote, folderId: data}
+      })
     }
-    }
+  }
 
   addNote(note){
     this.setState({
@@ -149,10 +123,10 @@ class App extends React.Component {
     const notes = this.state.notes.filter(note => note.id !== noteId)
 
     this.setState({
-      notes: notes
+      notes: notes,
     });
+  
   }
-
 
   noteToggleErr(){
     this.setState({
@@ -167,7 +141,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Link to='/' onClick={event => this.changeClicked(event.target.text)}>Noteful</Link>
+          <Link to='/' onClick={() => this.changeClicked(null)}>Noteful</Link>
         </header>
 
           <main>
@@ -189,13 +163,13 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={() => (
             <>
-            <RenderFolder/>
+            <RenderFolder />
             <AllNotes />
             </>
             )}/>
           <Route path="/folder/:id" render={ r => (
             <>
-            <RenderFolder clicked={this.state.clicked}/>
+            <RenderFolder />
             <RenderNotes folderId={r.match.params.id}/>
             </>
           )} /> 

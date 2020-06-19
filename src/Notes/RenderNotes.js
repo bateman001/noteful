@@ -15,6 +15,7 @@ noteList = () => {
 
     return notes.map((note, index) => {
         return <NotesList
+                folderId={note.folderId}
                 index={index} 
                 id={note.id}
                 name={note.name}

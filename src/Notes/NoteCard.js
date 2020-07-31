@@ -11,16 +11,15 @@ class NoteCard extends React.Component{
     static contextType = NotefulContext;
 
     folder = () => {
-        let noteCard = this.context.notes.find(note => note.id === this.props.noteId);
+        let noteCard = this.context.notes.find(note => note.id === +this.props.noteId);
 
-        let folderId = this.context.folders.find(folder => folder.id === noteCard.folderId);
+        let folder_id = this.context.folders.find(folder => folder.id === noteCard.folder_id);
 
-        return [noteCard, folderId];
+        return [noteCard, folder_id];
     }
 
     render(){
-        console.log(this.context)
-        console.log(this.folder()[0])
+        
         return(
             <div className="NoteCard">
             <NoteFullError>

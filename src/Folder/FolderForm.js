@@ -9,10 +9,11 @@ class FolderForm extends React.Component{
     submitFolder(event){
         event.preventDefault();
         
-        const url='http://localhost:9090/folders';
+        const url='http://localhost:8000/folders';
 
         const folder = {
-            "name": this.context.newFolder.name
+            "name": this.context.newFolder.name,
+            "date_created": new Date().toLocaleDateString() 
         }
 
         const options = {

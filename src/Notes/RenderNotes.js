@@ -11,11 +11,11 @@ class RenderNotes extends React.Component{
 static contextType = NotefulContext;
 
 noteList = () => {
-    let notes = this.context.notes.filter(note => note.folderId === this.props.folderId);
+    let notes = this.context.notes.filter(note => note.folder_id === +this.props.folder_id);
 
     return notes.map((note, index) => {
         return <NotesList
-                folderId={note.folderId}
+                folder_id={note.folder_id}
                 index={index} 
                 id={note.id}
                 name={note.name}
@@ -39,7 +39,7 @@ render(){
 }
 
 RenderNotes.propType = {
-    folderId: PropTypes.string
+    folder_id: PropTypes.string
 }
 
 

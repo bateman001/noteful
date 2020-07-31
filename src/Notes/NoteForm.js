@@ -11,12 +11,12 @@ class NoteForm extends React.Component{
     submitNote(e){
         e.preventDefault();
 
-        const url='http://localhost:9090/notes';
+        const url='http://localhost:8000/notes';
 
         const note = {
             "name": this.context.newNote.name,
             "modified": this.modifiedDate(),
-            "folderId": this.context.newNote.folderId,
+            "folder_id": this.context.newNote.folder_id,
             "content": this.context.newNote.content
         }
 
@@ -54,7 +54,7 @@ class NoteForm extends React.Component{
             return <SelectForm 
                 folderName = {folder.name}
                 index= {index}
-                folderId = {folder.id}
+                folder_id = {folder.id}
             />
         })
     }
@@ -75,7 +75,7 @@ class NoteForm extends React.Component{
                 <input type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
                 <label htmlFor="Folder">Folder</label>  
-                <select id="folderId" value={this.context.newNote.folderId} onChange={e => this.context.updateNote(e.target.value, e.target.id)}>
+                <select id="folder_id" value={this.context.newNote.folder_id} onChange={e => this.context.updateNote(e.target.value, e.target.id)}>
                     {this.folderOptions()}
                 </select>
                 <button type="submit">submit</button>

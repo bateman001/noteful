@@ -8,9 +8,9 @@ class DeleteNote extends React.Component{
     static contextType = NotefulContext;
 
     deleteNote(e, note){
-        console.log('hey')
+
         e.preventDefault();
-        const url=`http://localhost:9090/notes/${note}`;
+        const url=`http://localhost:8000/notes/${note}`;
 
         fetch(url, {method: 'DELETE',
                     header: {
@@ -18,10 +18,10 @@ class DeleteNote extends React.Component{
                     },
                 })
         .then(response => {
-            if (response.status !== 200){
+            if (response.status !== 204){
                 throw new Error(response.status);
             }
-            return response.json();
+            return response;
         })
         .then(() => {
             if(this.context.folderClicked)

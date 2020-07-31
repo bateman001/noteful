@@ -20,14 +20,14 @@ class App extends React.Component {
         newNote: {
           name: '',
           content: '',
-          folderId: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"},
+          folder_id: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"},
         foldererr: false,
         noteErr: false,
         folderClicked: null,
     }
 
   componentDidMount(){
-    const folderurl='http://localhost:9090/folders';
+    const folderurl='http://localhost:8000/folders';
 
     fetch(folderurl)
     .then(reponse => reponse.json())
@@ -36,7 +36,8 @@ class App extends React.Component {
     }))
     .catch(err => 'something went wrong');
 
-    const notesurl='http://localhost:9090/notes';
+    const notesurl='http://localhost:8000/notes';
+
     fetch(notesurl)
     .then(response => response.json())
     .then(responseJson => this.setState({
@@ -85,9 +86,9 @@ class App extends React.Component {
     this.folderToggleErr();
   }
 
-  changeClicked(folderId){
+  changeClicked(folder_id){
     this.setState({
-      folderClicked: folderId
+      folderClicked: folder_id
     })
   }
 
@@ -101,9 +102,9 @@ class App extends React.Component {
       this.setState({
         newNote: {...this.state.newNote, content: data}
       })
-    }else if(id === "folderId"){
+    }else if(id === "folder_id"){
       this.setState({
-        newNote: {...this.state.newNote, folderId: data}
+        newNote: {...this.state.newNote, folder_id: data}
       })
     }
   }
@@ -170,7 +171,7 @@ class App extends React.Component {
           <Route path="/folder/:id" render={ r => (
             <>
             <RenderFolder />
-            <RenderNotes folderId={r.match.params.id}/>
+            <RenderNotes folder_id={r.match.params.id}/>
             </>
           )} /> 
 

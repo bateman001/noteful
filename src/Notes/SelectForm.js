@@ -6,7 +6,7 @@ class SelectForm extends React.Component{
     render(){
         return(
             <>
-            <option key={this.props.index} value={this.props.folderId}>{this.props.folderName}</option>
+            <option key={this.props.index} value={this.props.folder_id}>{this.props.folderName}</option>
             </>
         )
     }

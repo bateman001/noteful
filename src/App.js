@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import config from './config';
 import{Route, Switch, Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import RenderFolder from './Folder/RenderFolder';
@@ -27,7 +28,7 @@ class App extends React.Component {
     }
 
   componentDidMount(){
-    const folderurl='http://localhost:8000/folders';
+    const folderurl= config.API_ENPOINT + '/folders';
 
     fetch(folderurl)
     .then(reponse => reponse.json())
@@ -36,7 +37,7 @@ class App extends React.Component {
     }))
     .catch(err => 'something went wrong');
 
-    const notesurl='http://localhost:8000/notes';
+    const notesurl= config.API_ENPOINT + '/notes';
 
     fetch(notesurl)
     .then(response => response.json())

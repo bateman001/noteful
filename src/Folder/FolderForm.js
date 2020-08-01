@@ -1,5 +1,6 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
+import config from '../config'
 
 //FORM WHICH EXPANDS ONCE THE ADD FOLDER BUTTON IS CLICKED
 class FolderForm extends React.Component{
@@ -9,7 +10,7 @@ class FolderForm extends React.Component{
     submitFolder(event){
         event.preventDefault();
         
-        const url='http://localhost:8000/folders';
+        const url= config.API_ENDPOINT + '/folders';
 
         const folder = {
             "name": this.context.newFolder.name,

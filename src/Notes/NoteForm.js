@@ -2,6 +2,7 @@ import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 import SelectForm from './SelectForm';
+import config from '../config'
 
 //THE FORM WHICH EXPANDS ONCE YOU CLICK ADD NOTES IN COMPONENT ADDNOTE
 class NoteForm extends React.Component{
@@ -11,7 +12,7 @@ class NoteForm extends React.Component{
     submitNote(e){
         e.preventDefault();
 
-        const url='http://localhost:8000/notes';
+        const url= config.API_ENPOINT + '/notes';
 
         const note = {
             "name": this.context.newNote.name,

@@ -1,6 +1,7 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
+import config from '../config'
 
 //COMPONENT WHICH DELETS THE NOTE
 class DeleteNote extends React.Component{
@@ -10,7 +11,7 @@ class DeleteNote extends React.Component{
     deleteNote(e, note){
 
         e.preventDefault();
-        const url=`http://localhost:8000/notes/${note}`;
+        const url= config.API_ENDPOINT + `/notes/${note}`;
 
         fetch(url, {method: 'DELETE',
                     header: {

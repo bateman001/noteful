@@ -24,18 +24,18 @@ class NoteCard extends React.Component{
             <div className="NoteCard">
             <NoteFullError>
 
-                <div className="folderInfo">
+                <section className="folderInfo">
                 <h1>Folder: {this.folder()[1].name} </h1>
                 <Link to={`/folder/${this.folder()[1].id}`} id="goBack">Go Back</Link>
 
-                </div>
+                </section>
 
-                <div className="cardInfo">
+                <section className="cardInfo">
                 <h1>{this.folder()[0].name}</h1>
                 <p>{this.folder()[0].content}</p>
 
                 <DeleteNote id={this.folder()[0].id}/>
-                </div>
+                </section>
             </NoteFullError>
             
             </div>

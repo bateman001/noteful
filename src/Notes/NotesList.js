@@ -13,10 +13,14 @@ class NotesList extends React.Component{
     render(){
         return(
             <li className="note" key={this.props.index}>
-                <Link to={`/notecard/${this.props.id}`}><h1>{this.props.name}</h1></Link>
-                <p>Date modified on {this.props.modified}</p>
-                <DeletNote id={this.props.id}
-                            folder_id={this.props.folder_id}/>
+                <div className='noteFlex'>
+                    <Link to={`/notecard/${this.props.id}`}><h1>{this.props.name}</h1></Link>
+                    <p className='date'>Date modified on {this.props.modified}</p>
+                </div>
+                <DeletNote 
+                    id={this.props.id}
+                    folder_id={this.props.folder_id}
+                />
             </li>
         )
     }

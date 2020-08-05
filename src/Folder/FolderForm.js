@@ -44,13 +44,21 @@ class FolderForm extends React.Component{
     render(){
         return(
             <>
-            <form className="folderForm" onSubmit={e => this.submitFolder(e)}>
-                <legend>Add New Folder</legend>
+            <form className="form" onSubmit={e => this.submitFolder(e)}>
+                <legend>
+                    <h1>
+                    New Folder
+                    </h1> 
+                </legend>
 
                 <label htmlFor="newFolder">Name:</label>
                 {this.context.foldererr && <p className="error">*name field cannot be white space*</p>}
                 <input type="text" id="newFolder" onChange={e => this.context.updateFolder(e.target.value)} required/>
-                <input type="submit" value="Submit"/>
+                <div className='button-flex'>
+
+                    <button className='close' type="submit">submit</button>
+                    <button className='close' onClick={() => this.context.showForm('folder')}>close</button>
+                </div>
             </form>
             </>
         )

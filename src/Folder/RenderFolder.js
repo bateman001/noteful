@@ -1,7 +1,6 @@
 import React from 'react';
 import FolderList from './FolderList';
 import NotefulContext from '../NotefulContext';
-import AddFolder from './AddFolder';
 import NoteFullError from '../NoteFullError';
 
 //RENDERS ALL FOLDERS IN THE ARRAY 
@@ -27,12 +26,14 @@ render(){
     return(
         <>
         <div className="folderContent">
+            <legend>
+                <h1>Folders</h1>
+            </legend>
             <NoteFullError message='cannot display folder'>
             <ul>
                 {this.folder()}
             </ul>
             </NoteFullError>
-             <AddFolder />
         </div>
         </>
     );

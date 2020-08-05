@@ -1,7 +1,6 @@
 import React from 'react';
 import NotesList from './NotesList';
 import NotefulContext from '../NotefulContext';
-import AddNote from './AddNote';
 import NoteFullError from '../NoteFullError';
 import PropTypes from 'prop-types';
 
@@ -27,12 +26,12 @@ noteList = () => {
 render(){
     return(
         <div className="NotesContent">
-            <ul>
+
                 <NoteFullError message='cannot display notes'>
+            <ul>
                  {this.noteList()}
-                </NoteFullError>
-                <AddNote />
             </ul>
+                </NoteFullError>
         </div>
     );
 }

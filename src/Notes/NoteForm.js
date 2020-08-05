@@ -65,21 +65,25 @@ class NoteForm extends React.Component{
 
         return(
             <>
-            <form onSubmit={e => this.submitNote(e)}>
-                <legend>Add Note</legend>
+            <form className='form' onSubmit={e => this.submitNote(e)}>
+                <legend> <h1>Add Note</h1> </legend>
+
+                <label htmlFor="Content">Content:</label>
+                <textarea type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
                 <label htmlFor="Name">Name:</label>
                 {this.context.noteErr && <p className='error'>*name cannot be empty space*</p>}
                 <input type="text" id='name' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
 
-                <label htmlFor="Content">Content:</label>
-                <input type="text" id='content' onChange={e => this.context.updateNote(e.target.value, e.target.id)}/>
-
                 <label htmlFor="Folder">Folder</label>  
                 <select id="folder_id" value={this.context.newNote.folder_id} onChange={e => this.context.updateNote(e.target.value, e.target.id)}>
                     {this.folderOptions()}
                 </select>
-                <button type="submit">submit</button>
+
+                <div className="button-flex">
+                    <button className='close' onClick={() => this.context.showForm('note')}>close</button>
+                    <button className='close' type="submit">submit</button>
+                </div>
             </form>
             </>
         )

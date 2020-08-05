@@ -8,6 +8,9 @@ import RenderNotes from './Notes/RenderNotes';
 import NoteCard from './Notes/NoteCard';
 import NotefulContext from './NotefulContext';
 import AllNotes from './Notes/AllNotes';
+import Menu from './Menu/Menu';
+import NoteForm from './Notes/NoteForm';
+import FolderForm from './Folder/FolderForm';
 
 
 class App extends React.Component {
@@ -25,6 +28,7 @@ class App extends React.Component {
         foldererr: false,
         noteErr: false,
         folderClicked: null,
+        showMenu: false
     }
 
   componentDidMount(){
@@ -59,6 +63,12 @@ class App extends React.Component {
       noteFormHidden: !this.state.noteFormHidden
     })
   }
+  }
+
+  showMenu(){
+    this.setState({
+      showMenu: !this.state.showMenu
+    })
   }
 
   //FOLDER FUNCTIONS
@@ -142,11 +152,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <Link to='/' onClick={() => this.changeClicked(null)}>Noteful</Link>
-        </header>
 
-          <main>
           <NotefulContext.Provider value={{
             ...this.state,
             history,
@@ -159,9 +165,22 @@ class App extends React.Component {
             folderToggleErr: () => this.folderToggleErr(),
             noteToggleErr: () => this.noteToggleErr(),
             changeClicked: id => this.changeClicked(id),
-            handleChange: event => this.handleChange(event)
+            handleChange: event => this.handleChange(event),
+            showMenu: () => this.showMenu()
           }}>
 
+        <header className="App-header">
+          <Link to='/' onClick={() => this.changeClicked(null)}> <h1>Noteful</h1></Link>
+          <nav>
+            <Menu/>
+          </nav>
+        </header>
+
+        <main>
+        
+        {this.state.noteFormHidden && <NoteForm />}
+        {this.state.folderFormHidden && <FolderForm />}
+        
         <Switch>
           <Route exact path='/' render={() => (
             <>
@@ -180,10 +199,10 @@ class App extends React.Component {
             <NoteCard noteId={r.match.params.id} />  
           )}/>
           </Switch> 
+          </main>
         </NotefulContext.Provider>
 
           
-          </main>
       </div>
   );
   }

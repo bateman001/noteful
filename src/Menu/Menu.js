@@ -1,8 +1,7 @@
 import React from 'react'
 import NotefulContext from '../NotefulContext'
 import { Link } from 'react-router-dom'
-// import AddNote from '../Notes/AddNote';
-// import AddFolder from '../Folder/AddFolder'
+import homeIcon from '../images/homeIcon.png'
 
 class Menu extends React.Component {
 
@@ -11,11 +10,11 @@ class Menu extends React.Component {
     render(){
         return (
         <ul className='menu'>
-          <Link to='/' onClick={() => {
+        <li> <Link to='/' onClick={() => {
             this.context.showMenu()
             this.context.changeClicked(null)
             }
-            }> <li>Home</li></Link>
+            }> <img src={homeIcon} alt='home Icon' /></Link> </li>
                 <li onClick={() => {
                     this.context.showMenu()
                     this.context.showForm('folder')

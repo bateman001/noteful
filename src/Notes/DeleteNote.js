@@ -1,7 +1,8 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
-import config from '../config'
+import config from '../config';
+import deleteIcon from '../images/icons8-delete-50.png';
 
 //COMPONENT WHICH DELETS THE NOTE
 class DeleteNote extends React.Component{
@@ -38,7 +39,7 @@ class DeleteNote extends React.Component{
 
     render(){
         return(                
-        <button id="delete" className='deleteNote' onClick={(e) => this.deleteNote(e, this.props.id)}>delete note</button>
+        <button id="delete" className='deleteNote' onClick={(e) => this.deleteNote(e, this.props.id)}><img src={deleteIcon} alt='crossmark' /></button>
         )
     }
 }

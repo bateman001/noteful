@@ -81,8 +81,8 @@ class NoteForm extends React.Component{
                 </select>
 
                 <div className="button-flex">
-                    <button className='close' onClick={() => this.context.showForm('note')}>close</button>
                     <button className='close' type="submit">submit</button>
+                    <button className='close' onClick={() => this.context.showForm('note')}>close</button>
                 </div>
             </form>
             </>

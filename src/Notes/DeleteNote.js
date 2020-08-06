@@ -12,7 +12,7 @@ class DeleteNote extends React.Component{
     deleteNote(e, note){
 
         e.preventDefault();
-        const url= config.API_ENDPOINT + `/notes/${note}`;
+        const url= config.API_URL + `notes/${note}`;
 
         fetch(url, {method: 'DELETE',
                     header: {

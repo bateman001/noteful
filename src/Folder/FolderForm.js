@@ -10,7 +10,7 @@ class FolderForm extends React.Component{
     submitFolder(event){
         event.preventDefault();
         
-        const url= config.API_ENDPOINT + '/folders';
+        const url= config.API_URL + 'folders';
 
         const folder = {
             "name": this.context.newFolder.name,
@@ -21,7 +21,7 @@ class FolderForm extends React.Component{
             method: 'POST',
             body: JSON.stringify(folder),
             headers: {
-                'Content-Type': 'application/json'
+                'content-Type': 'application/json'
             }
         }
 

@@ -12,7 +12,7 @@ class NoteForm extends React.Component{
     submitNote(e){
         e.preventDefault();
 
-        const url= config.API_ENPOINT + '/notes';
+        const url= config.API_URL + 'notes';
 
         const note = {
             "name": this.context.newNote.name,

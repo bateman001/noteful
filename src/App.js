@@ -28,11 +28,11 @@ class App extends React.Component {
         foldererr: false,
         noteErr: false,
         folderClicked: null,
-        showMenu: false
+        showMenu: false,
     }
 
   componentDidMount(){
-    const folderurl= config.API_ENPOINT + '/folders';
+    const folderurl= config.API_URL + 'folders';
 
     fetch(folderurl)
     .then(reponse => reponse.json())
@@ -41,7 +41,7 @@ class App extends React.Component {
     }))
     .catch(err => 'something went wrong');
 
-    const notesurl= config.API_ENPOINT + '/notes';
+    const notesurl= config.API_URL + 'notes';
 
     fetch(notesurl)
     .then(response => response.json())
@@ -180,7 +180,7 @@ class App extends React.Component {
         
         {this.state.noteFormHidden && <NoteForm />}
         {this.state.folderFormHidden && <FolderForm />}
-        
+
         <Switch>
           <Route exact path='/' render={() => (
             <>

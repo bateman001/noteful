@@ -145,7 +145,6 @@ class App extends React.Component {
       noteErr: !this.state.noteErr
     })
   }
-
   
   render(){
     const {history} = this.props;
@@ -166,7 +165,7 @@ class App extends React.Component {
             noteToggleErr: () => this.noteToggleErr(),
             changeClicked: id => this.changeClicked(id),
             handleChange: event => this.handleChange(event),
-            showMenu: () => this.showMenu()
+            showMenu: () => this.showMenu(),
           }}>
 
         <header className="App-header">

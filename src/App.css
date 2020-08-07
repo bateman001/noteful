@@ -86,6 +86,15 @@ button, label, li, p{
     .NotesContent {
         width: 50%;
     }
+    .NotesContent legend{
+        position: sticky;
+        top: 0;
+        background-color: white;
+        border: 1px solid black;
+        padding: 0;
+        margin: 0;
+    }
+    
     
     .folderContent{
         width: 50%;
@@ -249,6 +258,35 @@ button, label, li, p{
     legend, label, input, button{
         margin: 10px 0;
     }
+
+    .delete{
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 50%;
+        height: 20%;
+        font-size: 15px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+    
+    .delete button{
+        margin: 10px;
+        transition-duration: 0.4s;
+    }
+    
+    .delete button:hover{
+        cursor: pointer;
+        background-color: rgb(72, 180, 72);
+    }
+    
     
 }
 
@@ -272,9 +310,9 @@ button, label, li, p{
         width: 40%;
         font-size: 25px;
         position: absolute;
-        top: 40%;
+        top: 20%;
         left: 80%;
-        transform: translate(-60%, -20%);
+        transform: translate(-80%, -20%);
     }
             
     .menu{
@@ -282,6 +320,7 @@ button, label, li, p{
         padding: 10px;
         background-color: transparent;
     }
+
     .menu img{
         width: 50px;
         height: auto;
@@ -316,6 +355,15 @@ button, label, li, p{
     
     .NotesContent {
         width: 60%;
+    }
+    
+    .NotesContent legend{
+        position: sticky;
+        top: 0;
+        background-color: white;
+        border: 1px solid black;
+        padding: 0;
+        margin: 0;
     }
     
     .folderContent{
@@ -498,6 +546,35 @@ button, label, li, p{
     input{
         height: 30px;
     }
+
+    .delete{
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 50%;
+        height: 20%;
+        font-size: 25px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+    
+    .delete button{
+        margin: 10px;
+        transition-duration: 0.4s;
+    }
+    
+    .delete button:hover{
+        cursor: pointer;
+        background-color: rgb(72, 180, 72);
+    }
+    
     
 }
 
@@ -579,6 +656,17 @@ main{
 
 .NotesContent {
     width: 70%;
+    color: black;
+
+}
+
+.NotesContent legend{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0;
+    margin: 0;
 }
 
 .folderContent{
@@ -607,6 +695,7 @@ main{
 .deleteNote{
     background-color: transparent;
 }
+
 .deleteNote img{
     width: 50%;
     transition-duration: 0.4s;
@@ -750,6 +839,34 @@ form{
 
 legend, label, input, button{
     margin: 10px 0;
+}
+
+.delete{
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30%;
+    height: 20%;
+    font-size: 15px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.delete button{
+    margin: 10px;
+    transition-duration: 0.4s;
+}
+
+.delete button:hover{
+    cursor: pointer;
+    background-color: rgb(72, 180, 72);
 }
 
 }

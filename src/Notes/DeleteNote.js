@@ -3,16 +3,22 @@ import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 import config from '../config';
 import deleteIcon from '../images/icons8-delete-50.png';
+import ConfirmDelete from './ConfirmDelete';
 
 //COMPONENT WHICH DELETS THE NOTE
 class DeleteNote extends React.Component{
 
+    state={
+        confirmDeleteHidden: false
+        
+    }
+
     static contextType = NotefulContext;
 
-    deleteNote(e, note){
+    deleteNote(note){
 
-        e.preventDefault();
         const url= config.API_URL + `notes/${note}`;
+
 
         fetch(url, {method: 'DELETE',
                     header: {
@@ -32,14 +38,32 @@ class DeleteNote extends React.Component{
                 this.context.history.push('/');
 
             this.context.removeNote(note);
-
+            this.cancelDelete()
         })
         .catch(console.log);
     }
 
+    cancelDelete = () => { 
+        this.setState({
+            confirmDeleteHidden: false,
+        })
+    }
+
+        
     render(){
-        return(                
-        <button id="delete" className='deleteNote' onClick={(e) => this.deleteNote(e, this.props.id)}><img src={deleteIcon} alt='crossmark' /></button>
+        return(   
+            <>
+            {this.state.confirmDeleteHidden && <ConfirmDelete
+                                        deleteNote={() => this.deleteNote(this.props.id)}
+                                        cancelDelete={this.cancelDelete} />}  
+
+            <button id="delete" className='deleteNote' onClick={(e) => {
+                this.setState({
+                    confirmDeleteHidden: true
+                })
+
+            }}><img src={deleteIcon} alt='crossmark' /></button>
+            </>
         )
     }
 }

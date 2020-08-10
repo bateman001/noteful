@@ -10,6 +10,7 @@ class AllNotes extends React.Component{
     notes = () => {
         return this.context.notes.map((note, index) => {
         return <NotesList 
+        key={note.id}
         folder_id={note.folder_id}
         index={index} 
         id={note.id}

@@ -12,6 +12,7 @@ static contextType = NotefulContext;
 folder = () => {
     return this.context.folders.map((folder, index) => {
        return <FolderList
+            key={folder.id}
             clicked={this.context.folderClicked === folder.id}
             index= {index}
             id={folder.id}
